@@ -8,7 +8,7 @@ numba
 opencv
 matplotlib
 pandas
-## ###########python code##################
+## python code
 
 kitti_util.py
 
@@ -16,13 +16,9 @@ meshlab_file.py
 
 draw3Dbox2img.py
 
-## ###########python code##################
 
 
-
-The demo file is meshlab_file.py
-
-## #############Some information need changed when you use this code.###############
+## Some information need changed when you use this code.
 
 
 img_id = 5147
@@ -37,16 +33,16 @@ points = np.fromfile(path, dtype=np.float32).reshape(-1, 4)
 
 df = read_detection('/home2/yang_ye/results_kitti/%06d.txt'%img_id)
 
-## #############Some information need changed when you use this code.###############
 
-## ###################################origin image##################################
+
+## origin image
 ![Ori](https://github.com/yeyang1021/KITTI_VIZ_3D/blob/master/005147.png)
 
-## ###############################3D Visualization##################################
+## 3D Visualization
 
 ![3D](https://github.com/yeyang1021/KITTI_VIZ_3D/blob/master/snapshot_514700.png)
 
 
-## #############################3D projected to image##############################
+## 3D projected to image
 ![3D_to_2D](https://github.com/yeyang1021/KITTI_VIZ_3D/blob/master/5147_img.png)
 
