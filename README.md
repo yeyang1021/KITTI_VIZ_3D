@@ -20,9 +20,9 @@ df = read_detection('/home2/yang_ye/results_kitti/%06d.txt'%img_id)
 
 ###############Some information need changed when you use this code.###############
 
-
+#####################################原图像##############################################
 ![原图像](https://github.com/yeyang1021/KITTI_VIZ_3D/blob/master/005147.png)
 
-###################################################################################
+#################################3D可视化效果图##########################################
 
 ![3D可视化效果图](https://github.com/yeyang1021/KITTI_VIZ_3D/blob/master/snapshot_514700.png)
