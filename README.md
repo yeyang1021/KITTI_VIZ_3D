@@ -5,8 +5,7 @@ This code is used for visualization by adding 3D bounding boxes to the LiDAR poi
 
 The demo file is meshlab_file.py
 
-Some information need changed when you use this code.
-
+###############Some information need changed when you use this code.###############
 img_id = 5147
 
 calib = Calibration('/home1/yang_ye/data/Kitti/testing/calib/%06d.txt'%img_id)
@@ -19,5 +18,7 @@ points = np.fromfile(path, dtype=np.float32).reshape(-1, 4)
 
 df = read_detection('/home2/yang_ye/results_kitti/%06d.txt'%img_id)
 
+###############Some information need changed when you use this code.###############
 
 
+![3D可视化效果图](https://github.com/yeyang1021/KITTI_VIZ_3D/blob/master/snapshot_514700.png)
