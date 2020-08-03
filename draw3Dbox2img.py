@@ -42,7 +42,7 @@ path_img = '/home1/yang_ye/data/Kitti/testing/image_2/%06d.png'%img_id
 df = read_detection('/home2/yang_ye/wei3/%06d.txt'%img_id)
 
 
-
+image = cv2.imread(path_img)
 df.head()
 
 print(len(df))
