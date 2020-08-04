@@ -1,6 +1,6 @@
 """ Helper methods for loading and parsing KITTI data.
-Author: Charles R. Qi
-Date: September 2017
+Author: 
+Date: 
 """
 from __future__ import print_function
 
@@ -529,6 +529,57 @@ def compute_3D_line_(x1,x2, y1,y2, z1,z2):
     save_points[2,:] = line_z1_z2
     save_points[5,:] = 255
     return save_points        
+
+def compute_3D_line_v2(x1,x2, y1,y2, z1,z2, color, d):
+    
+    line_x1_x2 = compute_line(x1, x2, d)
+    line_y1_y2 = compute_line(y1, y2, d)
+    line_z1_z2 = compute_line(z1, z2, d)    
+    
+    save_points = np.zeros((7,d), dtype = np.float)
+    save_points[0,:] = line_x1_x2[0:d]
+    save_points[1,:] = line_y1_y2[0:d]
+    save_points[2,:] = line_z1_z2[0:d]
+    save_points[4,:] = color[0]
+    save_points[5,:] = color[1]
+    save_points[6,:] = color[2]
+    
+    return save_points      
+
+
+def draw_2D_box(x1,x2,x3,x4, y1,y2,y3,y4, z1,z2,z3,z4):
+    color = [0,255,0]
+    d = 50
+    save_points1 = compute_3D_line_v2(x1,x2, y1,y2, z1,z2, color, d)
+    save_points2 = compute_3D_line_v2(x2,x3, y2,y3, z2,z3, color, d)
+    save_points3 = compute_3D_line_v2(x3,x4, y3,y4, z3,z4, color, d)
+    save_points4 = compute_3D_line_v2(x4,x1, y4,y1, z4,z1, color, d)
+    
+    save_points = np.concatenate((save_points1,save_points2,save_points3,save_points4), axis = 1)  
+    return save_points
+
+def draw_vertical(x1,x2,x3,x4, y1,y2,y3,y4, z1,z2,z3,z4, x11,x22,x33,x44, y11,y22,y33,y44, z11,z22,z33,z44):
+    color = [0,255,0]
+    d = 50
+    save_points111 = compute_3D_line_v2(x1,x11, y1,y11, z1,z11, color, d)
+    save_points222 = compute_3D_line_v2(x2,x22, y2,y22, z2,z22, color, d)
+    save_points333 = compute_3D_line_v2(x3,x33, y3,y33, z3,z33, color, d)
+    save_points444 = compute_3D_line_v2(x4,x44, y4,y44, z4,z44, color, d)    
+    save_points = np.concatenate((save_points111,save_points222,save_points333,save_points444), axis = 1)       
+    return save_points
+
+    
+def draw_3D_box(x1,x2,x3,x4, y1,y2,y3,y4, z1,z2,z3,z4, x11,x22,x33,x44, y11,y22,y33,y44, z11,z22,z33,z44):    
+    up = draw_2D_box(x1,x2,x3,x4, y1,y2,y3,y4, z1,z2,z3,z4)
+    
+    down = draw_2D_box(x11,x22,x33,x44, y11,y22,y33,y44, z11,z22,z33,z44)
+
+    vertical = draw_vertical(x1,x2,x3,x4, y1,y2,y3,y4, z1,z2,z3,z4, x11,x22,x33,x44, y11,y22,y33,y44, z11,z22,z33,z44)    
+    
+    save_points = np.concatenate((up,down,vertical), axis = 1)     
+    
+    return  save_points  
+  
     
     
 def compute_line(x1, x2, d=300):
@@ -543,3 +594,31 @@ def compute_line(x1, x2, d=300):
         return tmp[::-1]
 
     
+def draw_circle(center, r, axis=2, color=[0,0,255], res=0.01):
+    theta = np.arange(0, 2*np.pi, 0.01)
+    x = r * np.cos(theta)
+    y = r * np.sin(theta)
+    save_circle = np.zeros((7, x.shape[0]), dtype = np.float)
+    if axis == 0:
+        x = center[1] + x
+        y = center[2] + y
+        save_circle[0,:] = center[0]
+        save_circle[1,:] = x
+        save_circle[2,:] = y
+        
+    elif axis == 1:
+        x = center[0] + x
+        y = center[2] + y   
+        save_circle[0,:] = x
+        save_circle[1,:] = center[1]
+        save_circle[2,:] = y        
+    elif axis == 2:
+        x = center[0] + x
+        y = center[1] + y          
+        save_circle[0,:] = x
+        save_circle[1,:] = y
+        save_circle[2,:] = center[2]   
+    save_circle[4,:] = color[0]
+    save_circle[5,:] = color[1]
+    save_circle[6,:] = color[2]
+    return save_circle
