@@ -52,3 +52,7 @@ df = read_detection('/home2/yang_ye/results_kitti/%06d.txt'%img_id)
 ## 3D projected to image
 ![3D_to_2D](https://github.com/yeyang1021/KITTI_VIZ_3D/blob/master/5147_img.png)
 
+
+## Draw voxels and circles
+![voxels](https://github.com/yeyang1021/KITTI_VIZ_3D/blob/master/voxel.png)
+![circles](https://github.com/yeyang1021/KITTI_VIZ_3D/blob/master/circle.png)
