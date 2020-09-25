@@ -26,9 +26,9 @@ def read_detection(path):
 img_id = 1470
 
 
-calib = Calibration('/home/yeyang/Detectors/OpenPCDet/data/kitti/testing/calib/%06d.txt'%img_id)
+calib = Calibration('/home/yeyang/data/kitti/testing/calib/%06d.txt'%img_id)
 
-path = '/home/yeyang/Detectors/OpenPCDet/data/kitti/testing/velodyne/%06d.bin'%img_id
+path = '/home/yeyang/data/kitti/testing/velodyne/%06d.bin'%img_id
 
 
 
