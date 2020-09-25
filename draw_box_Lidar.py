@@ -26,16 +26,9 @@ def read_detection(path):
 img_id = 1470
 
 
-calib = Calibration('/home/yeyang/data/kitti/testing/calib/%06d.txt'%img_id)
-
 path = '/home/yeyang/data/kitti/testing/velodyne/%06d.bin'%img_id
 
-
-
-
 points = np.fromfile(path, dtype=np.float32).reshape(-1, 4)
-
-
 
 df = read_detection('/home/yeyang/pp_test/%06d.txt'%img_id)
 
@@ -76,8 +69,6 @@ save_ = np.zeros((7,0),dtype=float)
 for o in range(len(df)):
 
     corners_3d = compute_3d_box_cam2(*df.loc[o, ['height', 'width', 'length', 'pos_x', 'pos_y', 'pos_z', 'rot_y']])
-
-    
     
     x1,x2,x3,x4 = corners_3d[0,0:4]
     y1,y2,y3,y4 = corners_3d[2,0:4]
@@ -135,7 +126,6 @@ def remove_points(points):
     
     return points            
 
-
   
 pad = np.zeros((points.shape[0],3), dtype = np.float)   
 save_[0:3,:] = save_[[0,2,1],:]
@@ -143,10 +133,6 @@ save_[0:3,:] = save_[[0,2,1],:]
 points = np.concatenate((points,pad), axis = 1)
 points = remove_points(points)
 points = np.concatenate((points,save_.T), axis = 0)
-
-
-
-
 
 np.savetxt(str(img_id) + '_test_file_Lidar.txt', points)
 
