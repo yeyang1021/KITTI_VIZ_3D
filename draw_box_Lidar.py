@@ -9,7 +9,9 @@ from kitti_util import *
 from matplotlib.lines import Line2D
 import cv2
 
-
+##################################################
+##the detected *.txt using LiDAR coordinate 
+##################################################
 
 
 def read_detection(path):
